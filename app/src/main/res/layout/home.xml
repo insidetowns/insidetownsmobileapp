@@ -3,7 +3,17 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+    android:id="@+id/main_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--Header layout start-->
+    <include
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        layout="@layout/menu_toolbar_layout"/>
+    <!--Header layout end-->
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_top"
         android:background="@color/white"

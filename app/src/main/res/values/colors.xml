@@ -42,8 +42,8 @@
 
   <!--  new colors-->
     <color name="lightblu">#7F8DAB</color>
-    <color name="bt1">#0028fb</color>
-    <color name="bt2">#00eaf5</color>
+    <color name="bt1">#c64798</color>
+    <color name="bt2">#492b73</color>
 
     <color name="bt11">#584BDD</color>
     <color name="bt22">#B755FF</color>
@@ -52,5 +52,19 @@
     <color name="google">#E6391E</color>
     <color name="homebg">#F2F2F2</color>
     <color name="facebook">#4363E2</color>
+
+    <color name="app_color">#f2b255</color>
+
+
+
+
+    <!--Application common colors start-->
+    <color name="header_color">#f2b255</color>
+    <color name="header_text_color">#ffffff</color>
+    <!--Application common colors end-->
+
+
+
+
 
 </resources>

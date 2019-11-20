@@ -10,73 +10,71 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-
     <uses-permission android:name="android.permission.CAMERA" />
+
     <application
+        android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@mipmap/app_iconn"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/app_iconn"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:usesCleartextTraffic="true"
         android:theme="@style/NoActionBar"
-        android:name="android.support.multidex.MultiDexApplication">
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Activities.SideMenuActivity"></activity>
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-
-    <activity
-            android:name="com.it.insidetowns.theinsidetowns.Activities.NewSearchActivity"
-            android:screenOrientation="portrait"
-
-            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"/>
         <activity
-            android:name="com.it.insidetowns.theinsidetowns.Activities.Code"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.it.insidetowns.theinsidetowns.Activities.InfoPage"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.it.insidetowns.theinsidetowns.Activities.CategoryDetails"
+            android:name=".Activities.NewSearchActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
         <activity
-            android:name="com.it.insidetowns.theinsidetowns.Activities.CategoryDetailsTypeThree"
+            android:name=".Activities.Code"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.InfoPage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.CategoryDetails"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
+        <activity
+            android:name=".Activities.CategoryDetailsTypeThree"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.it.insidetowns.theinsidetowns.Activities.EventSubCategory"
+            android:name=".Activities.EventSubCategory"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.it.insidetowns.theinsidetowns.Activities.EventCategoryDetailsTypeThree"
+            android:name=".Activities.EventCategoryDetailsTypeThree"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
         <activity
-            android:name="com.it.insidetowns.theinsidetowns.Activities.SubCategory"
+            android:name=".Activities.SubCategory"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.it.insidetowns.theinsidetowns.Activities.Home"
+            android:name=".Activities.Home"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            />
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.it.insidetowns.theinsidetowns.fragment_home"
+            android:name=".fragment_home"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            />
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.it.insidetowns.theinsidetowns.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -86,23 +84,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.it.insidetowns.theinsidetowns.Activities.Login"
+            android:name=".Activities.Login"
             android:screenOrientation="portrait"
-
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.it.insidetowns.theinsidetowns.Activities.SignUp"
+            android:name=".Activities.SignUp"
             android:screenOrientation="portrait"
-
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.it.insidetowns.theinsidetowns.Activities.WebViewShow"
+            android:name=".Activities.WebViewShow"
             android:screenOrientation="portrait"
-
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
         <activity
-            android:name="com.it.insidetowns.theinsidetowns.Activities.SearchActivity"
-            android:screenOrientation="portrait"
-            />
+            android:name=".Activities.SearchActivity"
+            android:screenOrientation="portrait" />
     </application>
+
 </manifest>

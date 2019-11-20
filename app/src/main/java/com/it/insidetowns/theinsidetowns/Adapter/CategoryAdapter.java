@@ -111,6 +111,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.BooldS
             if(!TextUtils.isEmpty(json)) {
                 list = gson.fromJson(json, type);
 
+
                 if (list.size() > 0) {
                     flag=true;
                     for (int x = 0; x < list.size(); x++) {
@@ -118,8 +119,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.BooldS
                         //    Log.e("020919 ", position+" flag " + "" + itemList.get(position).getId());
 
                         if (list.get(x).getCity().equalsIgnoreCase("" + itemList.get(position).getId())) {
-                            Log.e("170819 ", " Addfav ");
-                            Log.e("170819 ", " flag "+position + "      >>>>>   " + itemList.get(position).getId());
+                      /*      Log.e("170819 ", " Addfav ");
+                            Log.e("170819 ", " flag " + "" + itemList.get(position).getId());
+*/
                             flag = false;
 
                         }
@@ -157,7 +159,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.BooldS
                 public void onClick(View view) {
                     SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
                     String ID = sharedPrefs.getString("ID", "");
-
 
                     // String s = itemList.get(position).getFav();
                    /* if(s.equalsIgnoreCase("Leeds")){
@@ -214,10 +215,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.BooldS
                         }
                     });*/
                     //holder.loaderBg.setVisibility(View.VISIBLE);
-                    String url = context.getResources().getString(R.string.AppURL)+"api/Common/"+FavFun+"?Fav.userID="+uId+"&Fav.catid="+catId;
-                    Log.e("Url fav",""+url);
                     RequestQueue queue = Volley.newRequestQueue(context);
-                    final StringRequest reqQueue = new StringRequest(Request.Method.POST,url , new Response.Listener<String>() {
+                    final StringRequest reqQueue = new StringRequest(Request.Method.POST, ""+context.getResources().getString(R.string.AppURL)+"api/Common/"+FavFun+"?Fav.userID="+uId+"&Fav.catid="+catId, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             Log.e("180819 "," "+response);

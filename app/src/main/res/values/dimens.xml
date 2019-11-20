@@ -96,4 +96,16 @@
     <dimen name="layout_margin_20dp">20dp</dimen>
     <dimen name="layout_margin_30dp">30dp</dimen>
     <dimen name="layout_margin_35dp">35dp</dimen>
+
+    <!--Side menu dimen start-->
+    <dimen name="side_menu_width">250dp</dimen>
+    <!--Side menu dimen end-->
+
+    <!--Application common dimen start-->
+    <dimen name="toolbar_height">60dp</dimen>
+    <dimen name="toolbar_fa_icon_size">18sp</dimen>
+    <dimen name="toolbar_header_text_size">18sp</dimen>
+    <dimen name="toolbar_header_text_padding">5dp</dimen>
+    <!--Application common dimen end-->
+
 </resources>

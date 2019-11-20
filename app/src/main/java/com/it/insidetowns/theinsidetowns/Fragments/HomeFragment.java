@@ -393,8 +393,7 @@ public class HomeFragment extends Fragment {
 
                 allItems.clear();
 if(response.body().getFavCatDetailsList()!= null){
-    l = response.body().getFavCatDetailsList().size();
-}else{
+    l = response.body().getFavCatDetailsList().size();}else{
     int l =0;
                 }
                 if (l > 0) {
@@ -417,14 +416,6 @@ if(response.body().getFavCatDetailsList()!= null){
                     CategoriesApiCall();
 
                 } else {
-
-                    SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-                    SharedPreferences.Editor editor = sharedPrefs.edit();
-                    Gson gson = new Gson();
-
-                    String json2 = gson.toJson(allItems);
-                    editor.putString("AllFavouriteList", "");
-                    editor.commit();
                     //   JSONObject jsonObject1 = jsonObject.getJSONObject("Message");
                 /*    BaseActivity b = new BaseActivity();
                     b.ShowAnimatedDialogAllMsg(context, "m1",""+response.body().getfMessage().getMessage());

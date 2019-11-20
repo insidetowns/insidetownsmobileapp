@@ -9,7 +9,7 @@
     android:focusable="true"
     android:gravity="center"
     android:background="@mipmap/login_bg"
-
+    android:backgroundTint="@color/black"
     android:excludeFromRecents="true"
     android:scrollbars="vertical"
     android:focusableInTouchMode="true">
@@ -54,7 +54,7 @@
             android:gravity="center"
             android:textSize="@dimen/dimen_20"
             app:fontFamily="@font/montserrat_medium"
-            android:textColor="@color/bt1"
+            android:textColor="@color/white"
             android:text="@string/SignUpFrom"
             android:textStyle="bold" />
         <EditText
@@ -218,7 +218,7 @@
             android:gravity="center"
             android:textSize="@dimen/dimen_20"
             app:fontFamily="@font/montserrat_medium"
-            android:textColor="@color/bt1"
+            android:textColor="@color/white"
             android:text="@string/SignIn"
             android:textStyle="bold" />
 
