@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    tools:context=".Activities.CategoryDetails">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/loaderBg"
+        android:visibility="gone"
+        android:layout_centerInParent="true">
+        <pl.droidsonroids.gif.GifImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/loader"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50"
+
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:layout_width="@dimen/dimen_40"
+            android:layout_height="match_parent"
+            android:id="@+id/BackArrow"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            >
+
+        <ImageView
+
+            android:layout_marginTop="@dimen/dimen_10"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:tint="@color/black"
+            android:layout_marginLeft="@dimen/dimen_10"
+            app:srcCompat="@mipmap/back" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:id="@+id/line2"
+        android:layout_marginTop="@dimen/dimen_5"
+        android:layout_below="@+id/listSubCategory"
+        android:background="#c0c0c0"/>
+    <TextView
+        android:id="@+id/sub_catName"
+        android:layout_marginTop="@dimen/dimen_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/dimen_20"
+        android:textSize="@dimen/dimen_20"
+        app:fontFamily="@font/montserrat_medium"
+        android:textColor="@color/bt1"
+        android:text=""
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/cat_details_rcv"
+        android:background="@color/white"
+        android:visibility="visible"
+        android:overScrollMode="never"
+        android:layout_marginTop="@dimen/dimen_10"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:scrollbars="vertical" />
+</LinearLayout>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    tools:context=".Activities.NewSearchActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50"
+
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:layout_width="@dimen/dimen_40"
+            android:layout_height="match_parent"
+            android:id="@+id/BackArrow"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+
+                android:layout_marginTop="@dimen/dimen_10"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:tint="@color/black"
+                android:layout_marginLeft="@dimen/dimen_10"
+                app:srcCompat="@mipmap/back" />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llpwd"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_3"
+            android:layout_marginRight="@dimen/dimen_10"
+
+            android:background="@drawable/curved_bg_long_light"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/searchText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Email"
+                    android:layout_marginStart="16dp"
+                    android:background="@null"
+                    android:hint="Search"
+                    android:inputType="none"
+
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:text=""
+                    android:textColor="@color/gray"
+                    android:textColorHint="@color/light_gray" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/show"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <ImageView
+
+                        android:layout_width="70dp"
+                        android:layout_height="@dimen/dimen_70"
+                        android:paddingRight="@dimen/dimen_15"
+                        app:srcCompat="@mipmap/searcvh" />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/Restaurants"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@drawable/sharp_bg_category_blue"
+            android:layout_alignStart="@+id/password"
+            android:layout_centerVertical="true"
+            android:text="Discounts"
+            android:textAllCaps="false"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/BarsClubs"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="40dp"
+            android:background="@drawable/sharp_bg_category_blue"
+            android:layout_alignStart="@+id/password"
+            android:layout_centerVertical="true"
+            android:text="Categories"
+            android:textAllCaps="false"
+
+            android:textColor="@color/gray"/>
+        <Button
+            android:id="@+id/events"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="40dp"
+            android:background="@drawable/sharp_bg_category_blue"
+            android:textAllCaps="false"
+            android:layout_alignStart="@+id/password"
+            android:layout_centerVertical="true"
+            android:text="Events"
+            android:textColor="@color/gray"/>
+        <Button
+            android:id="@+id/Others"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_height="40dp"
+            android:background="@drawable/sharp_bg_category_blue"
+            android:textAllCaps="false"
+            android:layout_alignStart="@+id/password"
+            android:layout_centerVertical="true"
+            android:text="Shops"
+            android:textColor="@color/gray"/>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/cat_details_rcv"
+        android:background="@color/white"
+        android:visibility="visible"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/bt1"
+        android:visibility="gone"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimen_20"
+        android:id="@+id/noData"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/loaderBg"
+        android:visibility="gone"
+
+        android:layout_centerInParent="true">
+        <pl.droidsonroids.gif.GifImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/loader"
+            />
+    </LinearLayout>
+
+</LinearLayout>
