@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.blah.blah.app.ClientActivity">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@mipmap/home"
+
+        app:showAsAction="always"
+        android:title="@string/Explore"
+        android:orderInCategory="0"
+
+        />
+    <item
+        android:id="@+id/navigation_near_me"
+        android:icon="@mipmap/my_offers"
+        android:iconTint="@color/white"
+        android:orderInCategory="0"
+        app:showAsAction="always"
+        android:title="@string/MyOffers" />
+
+     <item
+        android:id="@+id/navigation_categories"
+        android:icon="@mipmap/favs"
+        app:showAsAction="always"
+        android:title="@string/Favourite"
+        android:orderInCategory="0"
+       />
+
+
+
+</menu>
+

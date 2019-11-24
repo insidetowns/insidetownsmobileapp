@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:gravity="center"
+    android:background="@mipmap/login_bg"
+    android:excludeFromRecents="true"
+    android:scrollbars="vertical"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/loaderBg"
+        android:visibility="gone"
+
+        android:layout_centerInParent="true">
+        <pl.droidsonroids.gif.GifImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/loader"
+            />
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/dimen_15"
+        android:layout_marginRight="@dimen/dimen_15">
+        <TextView
+
+            android:layout_marginTop="@dimen/dimen_30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/dimen_20"
+            app:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/white"
+            android:text="@string/SignInForm"
+            android:textStyle="bold" />
+        <EditText
+
+            android:id="@+id/Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            app:fontFamily="@font/montserrat_regular"
+
+            android:layout_marginTop="50dp"
+            android:background="@null"
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="text"
+            android:lines="1"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="@color/gray"
+            android:textColorHint="@color/lightblu" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/Email"
+            android:alpha=".4"
+            android:background="@drawable/mybutton_curved"
+            android:backgroundTint="@color/lightblu" />
+
+        <EditText
+            android:id="@+id/Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            app:fontFamily="@font/montserrat_regular"
+            android:layout_marginTop="@dimen/dimen_30"
+            android:background="@null"
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="@color/gray"
+            android:textColorHint="@color/lightblu" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/Email"
+            android:alpha=".4"
+            android:background="@drawable/mybutton_curved"
+            android:backgroundTint="@color/lightblu" />
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/dimen_30"
+            android:layout_width="250dp"
+            android:layout_height="45dp"
+            android:id="@+id/SignIn"
+            android:background="@drawable/curved_bg_small_two"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="@dimen/dimen_20"
+                app:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/white"
+                android:text="@string/SignIn"
+                 />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/SignUp"
+            android:layout_marginTop="@dimen/dimen_30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/dimen_20"
+            app:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/white"
+            android:text="@string/SignUp"
+            android:textStyle="bold" />
+
+
+        <TableRow
+            android:layout_marginTop="@dimen/dimen_20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            >
+            <View
+                android:layout_width="0dip"
+                android:layout_height="2dp"
+                android:layout_below="@+id/Email"
+                android:alpha=".4"
+                android:layout_weight=".2"
+                android:background="@drawable/mybutton_curved"
+                android:backgroundTint="@color/lightblu" />
+            <TextView
+
+                android:layout_width="0dip"
+                android:layout_height="@dimen/dimen_20"
+                android:layout_weight=".4"
+               android:layout_gravity="center"
+                app:fontFamily="@font/montserrat_medium"
+                android:gravity="center"
+                android:textColor="@color/bt1"
+                android:text="@string/OR"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_weight=".2"
+                android:layout_width="0dip"
+                android:layout_height="2dp"
+                android:layout_below="@+id/Email"
+                android:alpha=".4"
+                android:background="@drawable/mybutton_curved"
+                android:backgroundTint="@color/lightblu" />
+        </TableRow>
+
+        <LinearLayout
+            android:layout_marginBottom="@dimen/dimen_50"
+            android:layout_marginTop="@dimen/dimen_30"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@drawable/button_bg_transparent"
+                android:textSize="@dimen/dimen_20"
+                android:visibility="visible"
+                app:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/facebook"
+                android:text="@string/Facebook"
+                android:id="@+id/btn_fb"
+                 />
+          <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:visibility="gone"
+                />
+
+            <TextView
+                android:id="@+id/googleLogin"
+                android:layout_marginLeft="@dimen/dimen_20"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                app:fontFamily="@font/montserrat_medium"
+                android:background="@drawable/button_bg_transparent"
+                android:textSize="@dimen/dimen_20"
+                android:textColor="@color/google"
+                android:text="@string/Google"
+                 />
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>
+   </LinearLayout>
+

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:id="@+id/main_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--Header layout start-->
+    <include
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        layout="@layout/menu_toolbar_layout"/>
+    <!--Header layout end-->
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_top"
+        android:background="@color/white"
+        android:visibility="gone"
+        android:layout_height="@dimen/dimen_40"
+        android:layout_width="match_parent"
+        android:minHeight="?attr/actionBarSize"
+         >
+        <TextView
+             android:text=""
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_title"
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/dimen_20"
+            app:fontFamily="@font/poppins_extrabold"
+            android:textColor="@color/bt1"
+            android:textStyle="bold"
+            />
+
+
+    </android.support.v7.widget.Toolbar>
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+    </FrameLayout>
+
+    <android.support.design.widget.BottomNavigationView
+
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        app:tabMode="fixed"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="bottom"
+        app:menu="@menu/navigation"
+        app:itemBackground="@drawable/bottom_nav_color"
+        app:itemIconTint="@drawable/itembackground"
+        app:itemTextColor="@drawable/itemtextcolor"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
+
+        />
+
+
+</LinearLayout>
