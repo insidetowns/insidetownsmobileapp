@@ -243,22 +243,84 @@ public class InfoPage extends AppCompatActivity {
                     editor.commit();
 
 
-                    // location.setText(""+jsonObject.getString("Address"));
-                    //    Log.e("030819 "," "+jsonArray);
+                    JSONArray jsonArray = jsonObject.getJSONArray("Images");
+                    ArrayList<InfoImagesDetails> infoImagesDetails = new ArrayList<InfoImagesDetails>();
 
-                    Transformation transformation = new RoundedTransformationBuilder()
-                            .borderColor(Color.WHITE)
-                            .borderWidthDp(1)
-                            .cornerRadiusDp(8)
-                            .build();
+                    for(int i =0;i<jsonArray.length();i++){
+                        infoImagesDetails.add(new InfoImagesDetails(jsonArray.getJSONObject(i).getInt("Image_Id"), "" + "" + jsonArray.getJSONObject(i).getString("Image_Url")));
 
 
-                    Picasso.with(InfoPage.this)
-                            .load("" + jsonObject.getString("Event_Image"))
-                            .fit()
-                            .transform(transformation)
-                            .into(img);
+                        Log.e("Info Image API "+i,""+infoImagesDetails.get(i).getImage_Id());
 
+
+
+                    }
+
+
+                    if(infoImagesDetails.size()>0){
+
+
+                        for (int i = 0; i < infoImagesDetails.size(); i++) {
+                            mInflater = LayoutInflater.from(getApplicationContext());
+                            View view = mInflater.inflate(R.layout.activity_gallery_item_flag,
+                                    mGallery, false);
+                            ImageView img123 = (ImageView) view.findViewById(R.id.id_index_gallery_item_image);
+                       /* ImageView shopImage = (ImageView) view.findViewById(R.id.shopImage);
+
+                        final RelativeLayout llDiscount = (RelativeLayout) view.findViewById(R.id.llDiscount);
+                        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.beauty);
+                        TextView tv = (TextView) view
+                                .findViewById(R.id.tv);
+                        final TextView ProductId = (TextView) view.findViewById(R.id.ProductId);
+                        final TextView Ptype = (TextView) view.findViewById(R.id.Ptype);
+                        //  Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), "helvetica_medium.ttf");
+                        final TextView location = (TextView) view.findViewById(R.id.location);
+                        final TextView Shop_Name = (TextView) view.findViewById(R.id.Shop_Name);*/
+
+                            Transformation transformation = new RoundedTransformationBuilder()
+                                    .borderColor(Color.WHITE)
+                                    .borderWidthDp(1)
+                                    .cornerRadiusDp(20)
+                                    .build();
+
+
+                        /*tv.setText(bannerDetails.get(i).getDiscount());
+                        ProductId.setText(bannerDetails.get(i).getProductId());
+                        Ptype.setText(bannerDetails.get(i).getPtype());
+                        Shop_Name.setText(bannerDetails.get(i).getName());*/
+
+
+
+
+//                        location.setText("" + bannerDetails.get(i).getType());
+                            Picasso.with(getApplicationContext())
+                                    .load(infoImagesDetails.get(i).getImage_Url())
+                                    .fit()
+                                    .transform(transformation)
+                                    .into(img123);
+
+
+
+                            mGallery.addView(view);
+
+                        }
+                    }else {
+                        mGallery.setVisibility(View.GONE);
+
+                        //      discount_text.setText("11 "+""+jsonObject.getString("Shop_Name"));
+                        Transformation transformation = new RoundedTransformationBuilder()
+                                .borderColor(Color.WHITE)
+                                .borderWidthDp(1)
+                                .cornerRadiusDp(8)
+                                .build();
+
+
+                        Picasso.with(InfoPage.this)
+                                .load("" + jsonObject.getString("Event_Image"))
+                                .fit()
+                                .transform(transformation)
+                                .into(img);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -420,6 +482,8 @@ public class InfoPage extends AppCompatActivity {
                     }
 
 
+                    if(infoImagesDetails.size()>0){
+
 
                     for (int i = 0; i < infoImagesDetails.size(); i++) {
                         mInflater = LayoutInflater.from(getApplicationContext());
@@ -465,21 +529,23 @@ public class InfoPage extends AppCompatActivity {
                             mGallery.addView(view);
 
                     }
+                    }else {
+                    mGallery.setVisibility(View.GONE);
+
+                        //      discount_text.setText("11 "+""+jsonObject.getString("Shop_Name"));
+                        Transformation transformation = new RoundedTransformationBuilder()
+                                .borderColor(Color.WHITE)
+                                .borderWidthDp(1)
+                                .cornerRadiusDp(8)
+                                .build();
 
 
-                    //      discount_text.setText("11 "+""+jsonObject.getString("Shop_Name"));
-                    Transformation transformation = new RoundedTransformationBuilder()
-                            .borderColor(Color.WHITE)
-                            .borderWidthDp(1)
-                            .cornerRadiusDp(8)
-                            .build();
-
-
-                    Picasso.with(InfoPage.this)
-                            .load("" + jsonObject.getString("Product_Image"))
-                            .fit()
-                            .transform(transformation)
-                            .into(img);
+                        Picasso.with(InfoPage.this)
+                                .load("" + jsonObject.getString("Product_Image"))
+                                .fit()
+                                .transform(transformation)
+                                .into(img);
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();

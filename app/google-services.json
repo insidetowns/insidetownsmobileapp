@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "923392535035",
+    "firebase_url": "https://insidetowns.firebaseio.com",
+    "project_id": "insidetowns",
+    "storage_bucket": "insidetowns.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923392535035:android:5116b47d138f125e8bc35e",
+        "android_client_info": {
+          "package_name": "com.it.insidetowns.theinsidetowns"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923392535035-hv2vs97j9veme1vurbrkh79likf313ml.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.it.insidetowns.theinsidetowns",
+            "certificate_hash": "20c274e2af432c028704007967c267c3dfa78edc"
+          }
+        },
+        {
+          "client_id": "923392535035-8nfofdlack34h7vmvlvicr4uc1upd4ii.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9mTvaIcYx7-4b6sR6QjKhbqidWkMTtnw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923392535035-j0oekmu5olcpols11dnlhrm8nllc0c8m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
