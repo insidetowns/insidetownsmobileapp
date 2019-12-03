@@ -53,6 +53,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.it.insidetowns.theinsidetowns.Activities.BaseActivity;
 import com.it.insidetowns.theinsidetowns.Activities.InfoPage;
@@ -64,9 +65,13 @@ import com.it.insidetowns.theinsidetowns.network.RestApi;
 import com.it.insidetowns.theinsidetowns.objects.BannerDetails;
 import com.it.insidetowns.theinsidetowns.objects.CategoryObject;
 import com.it.insidetowns.theinsidetowns.objects.CategoryObjectNew;
+import com.it.insidetowns.theinsidetowns.objects.DeviceIdResponse;
 import com.it.insidetowns.theinsidetowns.objects.FavObjects.GetCatListTest;
+import com.it.insidetowns.theinsidetowns.objects.LoginRes.LoginCredentials;
+import com.it.insidetowns.theinsidetowns.objects.LoginRes.LoginResponse;
 import com.it.insidetowns.theinsidetowns.objects.chngPwd.ChgMessage;
 import com.it.insidetowns.theinsidetowns.objects.chngPwd.Credentials;
+import com.it.insidetowns.theinsidetowns.services.MyFirebaseInstanceIDService;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -102,7 +107,7 @@ public class HomeFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private LayoutInflater mInflater;
-
+    LoginCredentials loginCredentials;
 
     private Context context;
     BaseActivity b = new BaseActivity();
@@ -306,6 +311,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.activity_fragment_home, container, false);
         final SwipeRefreshLayout pullToRefresh = v.findViewById(R.id.pullToRefresh);
+        loginCredentials = new LoginCredentials();
+        updateDeviceId();
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -377,6 +384,33 @@ public class HomeFragment extends Fragment {
         return v;
 
     }
+
+
+    private void updateDeviceId() {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String ID = sharedPrefs.getString("ID", "");
+
+        loginCredentials.setUserId(Integer.parseInt(ID));
+        loginCredentials.setDeviceId(FirebaseInstanceId.getInstance().getToken());
+
+        Log.e("090919 ", " Email " + loginCredentials.getUserId()+"\n"+loginCredentials.getDeviceId());
+
+        final Call<DeviceIdResponse> dataSyncResponseCall = RestApi.get().getRestServiceTest().getDeviceId( loginCredentials.getUserId(),loginCredentials.getDeviceId());
+        //    final Call<LoginResponseRetro> dataSyncResponseCall = RestApi.get().getRestServiceTest().getLogin(Email.getText().toString().trim(),Password.getText().toString().trim());
+
+        dataSyncResponseCall.enqueue(new Callback<DeviceIdResponse>() {
+            @Override
+            public void onResponse(Call<DeviceIdResponse> call, retrofit2.Response<DeviceIdResponse> response) {
+                Log.e("010919 "," 3ww "+response.toString());
+            }
+
+            @Override
+            public void onFailure(Call<DeviceIdResponse> call, Throwable t) {
+                Log.e("010919 Failure"," 3ww "+call.toString());
+            }
+        });
+    }
+
 
     private void FavList() {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);

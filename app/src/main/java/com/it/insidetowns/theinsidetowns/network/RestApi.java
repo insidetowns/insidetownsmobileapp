@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.it.insidetowns.theinsidetowns.objects.DeviceIdResponse;
 import com.it.insidetowns.theinsidetowns.objects.EventSearch.EventListSearch;
 import com.it.insidetowns.theinsidetowns.objects.FavObjects.GetCatListTest;
 import com.it.insidetowns.theinsidetowns.objects.FavObjects.ProfileObject;
@@ -159,6 +160,9 @@ public class RestApi {
 
         @POST("user/Login")
         Call<LoginResponse> getLogin(@Body LoginCredentials loginCredentials);
+
+        @POST("user/UpdateDeviceId")
+        Call<DeviceIdResponse> getDeviceId(@Query("User") int User, @Query("DeviceId") String DeviceId);
       //  Call<LoginResponseRetro> getLogin(@Path("Email") String Email, @Path("Password") String Password);
 
         @POST("user/ProfileUpdate")

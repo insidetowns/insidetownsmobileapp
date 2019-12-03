@@ -38,7 +38,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         //Displaying data in log
 
-//        Log.e(TAG,"Data---" +remoteMessage.getData().get("notification_id"));
+        Log.e(TAG,"Data---" +remoteMessage.getData().get("dataImage")+""+remoteMessage.getData().get("dataId"));
 //        Log.e(TAG,"Title--" +remoteMessage.getData().get("dataTitle"));
 //        Log.e(TAG,"Message--" +remoteMessage.getData().get("dataMsg"));
 //        Log.e(TAG,"Message--" +remoteMessage.getData().get("dataTime"));
@@ -63,10 +63,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     public void onReceive(Context context, Intent intent) {
         // TODO Auto-generated method stub
-        Log.e("Broadcast", "__________GCM Broadcast");
 
         Bundle extras = intent.getExtras();
         Intent i = new Intent("NotificationReceived");
+        Log.e("Broadcast", "__________GCM Broadcast"+extras.toString());
 
         //Log messages
         Log.e(TAG,"NotifId" +extras.getString("notificationId"));
@@ -110,9 +110,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         /*setting up notification builder to make notification ui and setting its properties*/
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-           notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
+           notificationBuilder.setSmallIcon(R.mipmap.app_iconn);
         } else {
-            notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
+            notificationBuilder.setSmallIcon(R.mipmap.app_iconn);
         }
                 notificationBuilder.setContentTitle(title);
                 notificationBuilder.setContentText(messageBody);

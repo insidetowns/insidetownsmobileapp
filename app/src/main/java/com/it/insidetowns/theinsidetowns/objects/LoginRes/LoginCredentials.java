@@ -35,6 +35,30 @@ public class LoginCredentials implements Serializable {
     @Expose
     private String socialLoginType;
 
+    @SerializedName("DeviceId")
+    @Expose
+    private String deviceId;
+
+    @SerializedName("User")
+    @Expose
+    private int userId;
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public String getEmail() {
         return email;
     }

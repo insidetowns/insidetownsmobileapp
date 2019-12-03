@@ -103,7 +103,7 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        
+        <meta-data android:name="com.google.firebase.messaging.default_notification_channel" android:value="0:1575372566504505%592b4af3592b4af3"/>
         <activity
             android:name=".Activities.WebViewShow"
             android:screenOrientation="portrait"
