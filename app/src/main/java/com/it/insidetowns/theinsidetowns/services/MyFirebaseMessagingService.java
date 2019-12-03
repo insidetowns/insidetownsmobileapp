@@ -9,10 +9,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
@@ -20,7 +22,15 @@ import android.widget.ListView;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.it.insidetowns.theinsidetowns.Activities.InfoPage;
 import com.it.insidetowns.theinsidetowns.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
 
 
 /*This is the service running in background to receive the message
@@ -38,7 +48,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         //Displaying data in log
 
-        Log.e(TAG,"Data---" +remoteMessage.getData().get("dataImage")+""+remoteMessage.getData().get("dataId"));
+        try {
+            Log.e(TAG,"Data---" +remoteMessage.getMessageId()+
+                                    "\n"+remoteMessage.getData().get("id")+
+                                    "\n"+remoteMessage.getData().get("image")+
+                                    "\n"+remoteMessage.getMessageType()+
+                                    "\n"+remoteMessage.getNotification());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 //        Log.e(TAG,"Title--" +remoteMessage.getData().get("dataTitle"));
 //        Log.e(TAG,"Message--" +remoteMessage.getData().get("dataMsg"));
 //        Log.e(TAG,"Message--" +remoteMessage.getData().get("dataTime"));
@@ -56,7 +76,20 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         onReceive(this,notificationIntent);
 
-    sendNotification(remoteMessage.getData().get("dataTitle"),remoteMessage.getData().get("dataMsg"));
+
+        String json = remoteMessage.getNotification().getBody();
+        try {
+            JSONObject obj = new JSONObject(json);
+            String image = obj.getString("Product_Image");
+            String id = obj.getString("Product_ID");
+            Log.d("My App", image );
+            Log.d("My App", id);
+            sendNotification(remoteMessage.getData().get("dataTitle"),image,id);
+
+        } catch (Throwable t) {
+            Log.e("My App", "Could not parse malformed JSON: \"" + json + "\"");
+        }
+
 
     }
 
@@ -84,42 +117,56 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     //This method is only generating push notification
     //It is same as we did in earlier posts
-    private void sendNotification(String title,String messageBody) {
+    private void sendNotification(String title,String messageBody,String productId) {
 
-//        Intent resultIntent = new Intent(this, SplashScreenActivity.class);
+        Intent resultIntent = new Intent(this, InfoPage.class);
 //
 //        Log.d("Message body","" +messageBody);
 //
-//        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 //        // Adds the back stack
 //        stackBuilder.addParentStack(SplashScreenActivity.class);
 //
-//        resultIntent.putExtra("dataMsg",messageBody);
+        resultIntent.putExtra("dataMsg",messageBody);
 //        resultIntent.putExtra("dataTitle",title);
 
         // Adds the intent to top of the stack
-//        stackBuilder.addNextIntent(resultIntent);
+        stackBuilder.addNextIntent(resultIntent);
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        //  editor.putString("CatId", ""+itemList.get(position).getId());
+        editor.putString("Product_Id", "" + productId);
 
         /*intialising pending intent for the future use when  notificatiion is clicked from
         notification bar of device for navigating to notification screen*/
-//        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT);
 
         /*setting notification tone*/
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Bitmap image= null;
+        try {
+            String imageurl = "http://theitapp.tech"+messageBody;
+            URL url = new URL(imageurl);
+             image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
 
         /*setting up notification builder to make notification ui and setting its properties*/
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-           notificationBuilder.setSmallIcon(R.mipmap.app_iconn);
+            notificationBuilder.setSmallIcon(R.mipmap.app_iconn);
+            notificationBuilder.setLargeIcon(image);
         } else {
             notificationBuilder.setSmallIcon(R.mipmap.app_iconn);
         }
                 notificationBuilder.setContentTitle(title);
-                notificationBuilder.setContentText(messageBody);
+//                notificationBuilder.setContentText(messageBody);
                 notificationBuilder.setAutoCancel(true);
 //                notificationBuilder.setDefaults(Notification.DEFAULT_SOUND);
                 notificationBuilder.setSound(defaultSoundUri);
-//                notificationBuilder.setContentIntent(resultPendingIntent);
+                notificationBuilder.setContentIntent(resultPendingIntent);
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
