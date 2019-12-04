@@ -20,6 +20,7 @@ import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.widget.ListView;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.it.insidetowns.theinsidetowns.Activities.InfoPage;
@@ -47,50 +48,64 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         //Displaying data in log
-
-        try {
-            Log.e(TAG,"Data---" +remoteMessage.getMessageId()+
-                                    "\n"+remoteMessage.getData().get("id")+
-                                    "\n"+remoteMessage.getData().get("image")+
-                                    "\n"+remoteMessage.getMessageType()+
-                                    "\n"+remoteMessage.getNotification());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-//        Log.e(TAG,"Title--" +remoteMessage.getData().get("dataTitle"));
-//        Log.e(TAG,"Message--" +remoteMessage.getData().get("dataMsg"));
-//        Log.e(TAG,"Message--" +remoteMessage.getData().get("dataTime"));
-//
-//        NotificationListItem notificationListItem = new NotificationListItem(remoteMessage.getData().get("dataTitle"), remoteMessage.getData().get("dataMsg"),remoteMessage.getData().get("dataTime"),remoteMessage.getData().get("notification_id"),"UNRD");
-//
-//        notificationsArraylist.add(notificationListItem);
+        Log.d(TAG, "From: " + remoteMessage.getFrom());
 
         Intent notificationIntent =  new Intent();
 
-        notificationIntent.putExtra("notificationId",remoteMessage.getData().get("notification_id"));
-        notificationIntent.putExtra("notificationTitle",remoteMessage.getData().get("dataTitle"));
-        notificationIntent.putExtra("notificationMessage",remoteMessage.getData().get("dataMsg"));
-        notificationIntent.putExtra("notificationTime",remoteMessage.getData().get("dataTime"));
-
-        onReceive(this,notificationIntent);
-
-
         String json = remoteMessage.getNotification().getBody();
         try {
+            Log.e("Notification  Receive","started");
             JSONObject obj = new JSONObject(json);
             String image = obj.getString("Product_Image");
             String id = obj.getString("Product_ID");
+            String Cat_ID = obj.getString("Cat_ID");
+            String LocationID = obj.getString("LocationID");
+            String Product_Title = obj.getString("Product_Title");
             Log.d("My App", image );
             Log.d("My App", id);
-            sendNotification(remoteMessage.getData().get("dataTitle"),image,id);
+            Log.d("My App", Cat_ID);
+            Log.d("My App", LocationID);
+            Log.d("My App", Product_Title);
+
+
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("Notification", 0); // 0 - for private mode
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("notificationId",id);
+            editor.putString("notificationImage",image);
+            editor.putString("notificationTitle",Product_Title);
+            editor.putString("notificationMessage",Product_Title);
+            editor.putString("notificationLocId",LocationID);
+            editor.putString("notificationCatId",Cat_ID);
+            editor.commit();
+
+
+            notificationIntent.putExtra("notificationId",id);
+            notificationIntent.putExtra("notificationImage",image);
+            notificationIntent.putExtra("notificationTitle",Product_Title);
+            notificationIntent.putExtra("notificationMessage",Product_Title);
+            notificationIntent.putExtra("notificationLocId",LocationID);
+            notificationIntent.putExtra("notificationCatId",Cat_ID);
+
+            /*setting notification tone*/
+            Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Bitmap image12= null;
+            try {
+                String imageurl = "http://theitapp.tech"+image;
+                URL url = new URL(imageurl);
+                image12 = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+
+
+            sendNotification(Product_Title,image,id);
+
+            Log.e("Notification  Receive",""+image12+"   " +id);
+            onReceive(this,notificationIntent);
 
         } catch (Throwable t) {
             Log.e("My App", "Could not parse malformed JSON: \"" + json + "\"");
         }
-
-
     }
 
 
@@ -106,12 +121,26 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.e(TAG,"Notiftitle"+extras.getString("notificationTitle"));
         Log.e(TAG,"notificationMessage"+extras.getString("notificationMessage"));
         Log.e(TAG,"notificationTime"+extras.getString("notificationTime"));
-        // Data you need to pass to activity
-        i.putExtra("notificationId", extras.getString("notificationId"));
-        i.putExtra("notificationTitle", extras.getString("notificationTitle"));
-        i.putExtra("notificationMessage", extras.getString("notificationMessage"));
-        i.putExtra("notificationTime", extras.getString("notificationTime"));
 
+        i.putExtra("notificationId",extras.getString("notificationId"));
+        i.putExtra("notificationImage",extras.getString("notificationImage"));
+        i.putExtra("notificationTitle",extras.getString("notificationTitle"));
+        i.putExtra("notificationMessage",extras.getString("notificationMessage"));
+        i.putExtra("notificationLocId",extras.getString("notificationLocId"));
+        i.putExtra("notificationCatId",extras.getString("notificationCatId"));
+
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("Notification", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("notificationId",extras.getString("notificationId"));
+        editor.putString("notificationImage",extras.getString("notificationImage"));
+        editor.putString("notificationTitle",extras.getString("notificationTitle"));
+        editor.putString("notificationMessage",extras.getString("notificationMessage"));
+        editor.putString("notificationLocId",extras.getString("notificationLocId"));
+        editor.putString("notificationCatId",extras.getString("notificationCatId"));
+        editor.commit();
+
+        sendNotification(title,extras.getString("notificationImage").toString(),extras.getString("notificationId").toString());
         context.sendBroadcast(i);
     }
 
@@ -161,8 +190,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         } else {
             notificationBuilder.setSmallIcon(R.mipmap.app_iconn);
         }
-                notificationBuilder.setContentTitle(title);
-//                notificationBuilder.setContentText(messageBody);
+                notificationBuilder.setContentTitle("Inside Towns");
+                notificationBuilder.setContentText(title);
                 notificationBuilder.setAutoCancel(true);
 //                notificationBuilder.setDefaults(Notification.DEFAULT_SOUND);
                 notificationBuilder.setSound(defaultSoundUri);

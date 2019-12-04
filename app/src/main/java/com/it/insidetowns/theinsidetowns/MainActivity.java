@@ -2,6 +2,7 @@ package com.it.insidetowns.theinsidetowns;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -37,10 +38,33 @@ public class MainActivity extends AppCompatActivity {
     String Lat="",Long="";
     private PackageInfo info;
 
+    SharedPreferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /*Intent intent = new Intent("com.it.insidetowns.theinsidetowns.services.MyFirebaseMessagingService");
+        sendBroadcast(intent);*/
+
+        if (getIntent().getExtras() != null) {
+            Log.e("Extras ",""+getIntent().getExtras().keySet() );
+            Object value ;
+            for (String key : getIntent().getExtras().keySet()) {
+                if(key.equals("from")) {
+                    value = getIntent().getExtras().get(key); // value will represend your message body... Enjoy It
+                    Log.d("NotificationTag" , key+"____" + value);
+                }
+            }
+        }
+
+        preferences = getSharedPreferences("Notification",
+                Context.MODE_PRIVATE);
+
+        Log.e("Splash Id",""+preferences.getString("notificationId",""));
+        Log.e("Splash Image",""+preferences.getString("notificationImage",""));
+        Log.e("Splash Title",""+preferences.getString("notificationTitle",""));
+        Log.e("Splash Message",""+preferences.getString("notificationMessage",""));
 
         try {
             info = getPackageManager().getPackageInfo("com.it.insidetowns.theinsidetowns", PackageManager.GET_SIGNATURES);
